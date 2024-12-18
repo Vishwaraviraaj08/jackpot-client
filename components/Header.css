@@ -1,0 +1,69 @@
+/* Base styles */
+.text-anim {
+    font-family: "Dubai Medium", sans-serif;
+    cursor: default;
+    width: 100%;
+    height: 100px;
+    margin: 50px auto 20px;
+    display: block;
+    text-align: center;
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.text-anim span {
+    letter-spacing: 0.6rem;
+    position: relative;
+    top: 20px;
+    display: inline-block;
+    animation: bounce 0.3s ease infinite alternate;
+    font-size: 8rem;
+    color: #fff;
+    text-shadow: 0 1px 0 #ccc, 0 2px 0 #ccc, 0 3px 0 #ccc, 0 4px 0 #ccc,
+    0 5px 0 #ccc, 0 6px 0 transparent, 0 7px 0 transparent, 0 8px 0 transparent,
+    0 9px 0 transparent, 0 10px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Animation delay for each letter */
+.text-anim span:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.text-anim span:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.text-anim span:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.text-anim span:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+.text-anim span:nth-child(6) {
+    animation-delay: 0.5s;
+}
+
+.text-anim span:nth-child(7) {
+    animation-delay: 0.6s;
+}
+
+/* Animation */
+@keyframes bounce {
+    100% {
+        top: -20px;
+        text-shadow: 0 1px 0 #ccc, 0 2px 0 #ccc, 0 3px 0 #ccc, 0 4px 0 #ccc,
+        0 5px 0 #ccc, 0 6px 0 #ccc, 0 7px 0 #ccc, 0 8px 0 #ccc, 0 9px 0 #ccc,
+        0 50px 25px rgba(0, 0, 0, 0.2);
+    }
+}
+
+/* Media Query for mobile */
+@media screen and (max-width: 768px) {
+    .text-anim {
+        margin: 40px auto 20px;
+    }
+    .text-anim span {
+        font-size: 6rem; /* Reduce font size for smaller screens */
+    }
+}
