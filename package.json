@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
     "flipdown": "^0.3.2",
     "next": "15.1.1",

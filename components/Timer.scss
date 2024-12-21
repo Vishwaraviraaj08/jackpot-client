@@ -77,33 +77,33 @@ p {
     margin: 6rem auto 0;
     justify-content: center;
 }
-
-button {
-    z-index: 1;
-    border: none;
-    cursor: pointer;
-    font-size: 1.2rem;
-    position: relative;
-    padding: 1rem 2rem;
-    border-radius: .4rem;
-    letter-spacing: 1.6px;
-    color: var(--color-white);
-    text-transform: uppercase;
-    font-weight: var(--weight-bold);
-    background-color: var(--color-pink-68);
-    font-family: 'Red Hat Text', sans-serif;
-    transition: var(--transition) background-color;
-    box-shadow: 0 .4rem 1.4rem 0 rgba(251,94,132,0.39);
-
-    &:focus {
-        outline-offset: 2px;
-        outline: 2px dotted var(--color-pink-68);
-    }
-
-    &:hover {
-        background-color: #f17493;
-    }
-}
+//
+//button {
+//    z-index: 1;
+//    border: none;
+//    cursor: pointer;
+//    font-size: 1.2rem;
+//    position: relative;
+//    padding: 1rem 2rem;
+//    border-radius: .4rem;
+//    letter-spacing: 1.6px;
+//    color: var(--color-white);
+//    text-transform: uppercase;
+//    font-weight: var(--weight-bold);
+//    background-color: var(--color-pink-68);
+//    font-family: 'Red Hat Text', sans-serif;
+//    transition: var(--transition) background-color;
+//    box-shadow: 0 .4rem 1.4rem 0 rgba(251,94,132,0.39);
+//
+//    &:focus {
+//        outline-offset: 2px;
+//        outline: 2px dotted var(--color-pink-68);
+//    }
+//
+//    &:hover {
+//        background-color: #f17493;
+//    }
+//}
 
 button:disabled {
     cursor: none;
@@ -376,16 +376,15 @@ button:disabled {
 .header {
     padding: 0 2.4rem;
     text-align: center;
-    padding-top: 14.2rem;
     margin-bottom: 5.6rem;
     transition: var(--transition) padding;
     @media (min-width: 768px) {
-        padding-top: 6rem;
+        padding-top: 4rem;
     }
 
     @media (min-width: 768px) and (min-height: 790px) {
-        padding-top: 12rem;
-        margin-bottom: 9.1rem;
+        padding-top: 4rem;
+        margin-bottom: 3rem;
     }
 }
 

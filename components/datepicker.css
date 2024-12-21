@@ -1,0 +1,95 @@
+::-webkit-inner-spin-button {
+    display: none;
+}
+
+::-webkit-calendar-picker-indicator {
+    background-image: url(https://icons.iconarchive.com/icons/dakirby309/simply-styled/256/Calendar-icon.png);
+    background-position: center;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    color: rgba(204, 204, 204, 0); /* Makes the arrow invisible */
+    background-color: transparent; /* Remove the background color */
+}
+
+input[type=date] {
+    font-size: 25px;
+    padding: 10px; /* Add padding */
+    border: 1px solid #ccc; /* Optional: Adds a border for better visibility */
+    border-radius: 5px; /* Optional: Adds rounded edges */
+    background-color: transparent; /* Ensures no background color */
+}
+
+::-webkit-datetime-edit-text {
+    color: #555555;
+}
+
+::-webkit-datetime-edit-month-field {
+    color: #555555;
+}
+
+::-webkit-datetime-edit-day-field {
+    color: #555555;
+}
+
+::-webkit-datetime-edit-year-field {
+    color: #555555;
+}
+.date-picker-input{
+    margin: 20px;
+}
+
+.animated-buttonnn {
+    position: relative;
+    display: inline-block;
+    padding: 12px 24px;
+    border: none;
+    font-size: 16px;
+    background-color: inherit;
+    border-radius: 100px;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.13);
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.animated-buttonnn span:last-child {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background-color: #2196F3;
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.animated-buttonnn span:first-child {
+    position: relative;
+    z-index: 1;
+}
+
+.animated-buttonnn:hover {
+    box-shadow: 0 0 0 5px #2195f360;
+    color: #ffffff;
+}
+
+.animated-buttonnn:active {
+    scale: 0.95;
+}
+
+.animated-buttonnn:hover span:last-child {
+    width: 150px;
+    height: 150px;
+    opacity: 1;
+}
+
+
+
+
+
+
+

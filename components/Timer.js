@@ -3,6 +3,10 @@ import dayjs from 'dayjs';
 import Countdown from 'react-countdown';
 import { useEffect, useState } from 'react';
 import Header from "@/components/Header";
+import ResultTable from "@/components/ResultTable";
+import Button from "@/components/Button";
+import Overlay from "@/components/Overlay";
+import DatePicker from "@/components/DatePicker";
 
 function StaticCard({ position, number }) {
     return (
@@ -80,6 +84,12 @@ function App() {
             : now.hour(12).minute(0).second(0).millisecond(0).add(1, 'day').toDate();
     };
 
+    const data = [
+        { time: "12:00:00", tokenId: "0x1234" },
+        { time: "12:05:00", tokenId: "0x1235" },
+        { time: "12:10:00", tokenId: "" },
+        ]
+
     const countFromDate = getNextMidnight();
 
     const Completionist = () => <span>Time’s up!</span>;
@@ -89,6 +99,8 @@ function App() {
         return <FlipClock hours={hours} minutes={minutes} seconds={seconds} />;
     };
 
+    const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+
     return (
         <div className="App">
             <Header/>
@@ -96,6 +108,14 @@ function App() {
                 <h1 className="t-heading">Time Remaining</h1>
             </header>
             <Countdown date={countFromDate} renderer={renderer} />
+            <ResultTable data={data}/>
+            <Button isOverlayOpen={isOverlayOpen} setIsOverlayOpen={setIsOverlayOpen}/>
+            <Overlay isOpen={isOverlayOpen} onClose={() => setIsOverlayOpen(false)}>
+                <h2 style={{margin:'30px auto', fontSize:'30px'}}>History</h2>
+                <p style={{fontSize: '15px'}}>Enter Date to see the history</p>
+                <DatePicker/>
+
+            </Overlay>
         </div>
     );
 }
