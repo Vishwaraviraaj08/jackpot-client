@@ -14,14 +14,13 @@ const DatePicker = () => {
         setCurrentDate(e.target.value);
     };
 
-    // Function to simulate fetching data based on the selected date
     const handleShowHistory = () => {
-        setIsLoading(true); // Set loading state to true
-        fetch(`/api/getData?date=${currentDate}`)
+        setIsLoading(true);
+        fetch(`https://fantasy-api-delta.vercel.app/api/getTokenHistory?date=${currentDate}`)
             .then((response) => response.json())
             .then((json) => {
-                setData(json); // Set the fetched data
-                setIsLoading(false); // Set loading state to false once data is fetched
+                setData(json);
+                setIsLoading(false);
             })
             .catch(() => {
                 setIsLoading(false); // In case of an error, stop the loading state
