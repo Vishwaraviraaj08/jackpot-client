@@ -16,7 +16,7 @@ const DatePicker = () => {
 
     const handleShowHistory = () => {
         setIsLoading(true);
-        fetch(`https://fantasy-api-delta.vercel.app/api/getTokenHistory?date=${currentDate}`)
+        fetch(`https://fantasy-api-delta.vercel.app/api/tokenHistory?date=${currentDate}`)
             .then((response) => response.json())
             .then((json) => {
                 setData(json);
