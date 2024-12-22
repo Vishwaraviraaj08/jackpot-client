@@ -1,5 +1,3 @@
-import {NextResponse} from "next/server";
+import dayjs from "dayjs";
 
-export async function GET(req) {
-    return NextResponse.json({data : ['200', '300', '400']}, {status: 200});
-}
+console.log(dayjs("2024-12-22T16:20:08.903Z"))

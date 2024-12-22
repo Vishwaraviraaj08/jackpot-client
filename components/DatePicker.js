@@ -23,7 +23,7 @@ const DatePicker = () => {
                 setIsLoading(false);
             })
             .catch(() => {
-                setIsLoading(false); // In case of an error, stop the loading state
+                setIsLoading(false);
                 alert("Failed to fetch data.");
             });
     };

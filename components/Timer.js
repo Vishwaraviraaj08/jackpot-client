@@ -98,20 +98,13 @@ function App() {
 
                 const tokensExpiredData = await tokensExpiredResponse.json();
 
+
                 const tokensExpiredObject = tokensExpiredData.reduce((acc, item) => {
                     acc[item.time] = item.tokenId;
                     return acc;
                 }, {});
 
                 setTokenData((prev) => {
-                    if (tokensExpiredObject === undefined || tokensExpiredObject === null || Object.keys(tokensExpiredObject).length === 0) {
-                        return prev;
-                    }
-                    if (prev === undefined || prev === null || Object.keys(prev).length === 0) {
-                        return {};
-                    }
-
-
                     return {
                         ...prev, ...tokensExpiredObject,
                     };
@@ -127,19 +120,106 @@ function App() {
     }, []);
 
 
-    useEffect(() => {
-        console.log(tokenData)
-    }, [tokenData]);
 
-    const getNextMidnight = () => {
-        const now = dayjs();
-        return now.hour() < 12 ? now.hour(0).minute(0).second(0).millisecond(0).add(12, 'hour').toDate() : now.hour(12).minute(0).second(0).millisecond(0).add(1, 'day').toDate();
+
+
+    // ------------------------------------------------------------------------------------
+
+
+    const [timeLeft, setTimeLeft] = useState(null);
+
+
+    const fetchServerTime = async () => {
+        try {
+            const response = await fetch(
+                "https://fantasy-api-delta.vercel.app/api/timeIST"
+            );
+            let data = await response.json();
+            data = data.replace("Z", "+05:30")
+            return dayjs(data);
+        } catch (error) {
+            console.error("Failed to fetch server time:", error);
+        }
+    };
+
+    const fetchExpiredTokens = async () => {
+        try {
+            const tokensExpired = await fetch("https://fantasy-api-delta.vercel.app/api/tokensExpired", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            const tokensExpiredData = await tokensExpired.json();
+            console.log(tokensExpiredData)
+
+            const tokensExpiredObject = tokensExpiredData.reduce((acc, item) => {
+                acc[item.time] = item.tokenId;
+                return acc;
+            }, {});
+
+            setTokenData((prev) => {
+                return {
+                    ...prev, ...tokensExpiredObject,
+                };
+            })
+        } catch (error) {
+            console.error("Failed to fetch expired tokens:", error);
+        }
     };
 
 
-    const countFromDate = getNextMidnight();
+    useEffect(() => {
+        if (timeLeft > 0) {
+            const timer = setTimeout(() => {
+                setTimeLeft((prev) => prev - 1000);
+            }, 1000);
+            console.log(timeLeft, tokenData)
 
-    const Completionist = () => <span>Time’s up!</span>;
+            return () => clearTimeout(timer);
+        } else if (timeLeft !== null) {
+            fetchExpiredTokens()
+        }
+    }, [timeLeft]);
+
+
+    useEffect(() => {
+        startCountdown()
+    }, [tokenData]);
+
+
+    const findLowestEmptyTime = () => {
+        const currentTimeKeys = Object.keys(tokenData)
+            .filter((key) => tokenData[key] === "")
+            .map((key) => dayjs().hour(parseInt(key.split(":")[0])).minute(parseInt(key.split(":")[1])).second(0));
+        const lowestVal = currentTimeKeys.sort((a, b) => a.diff(b))[0] || null;
+        return lowestVal;
+    };
+
+
+    const startCountdown =  async () => {
+        const serverTime = await fetchServerTime();
+        const lowestEmptyTime = findLowestEmptyTime();
+
+        if (lowestEmptyTime) {
+            const difference = lowestEmptyTime.diff(serverTime) + (61*1000);
+
+            if (difference > 0) {
+                setTimeLeft(difference);
+            }
+        }
+    };
+
+
+
+
+
+
+
+
+
+    const Completionist = () => <FlipClock hours={0} minutes={0} seconds={0} />;
 
     const renderer = ({hours, minutes, seconds, completed}) => {
         if (completed) return <Completionist/>;
@@ -153,13 +233,15 @@ function App() {
             <header className="header">
                 <h1 className="t-heading">Time Remaining</h1>
             </header>
-            <Countdown date={countFromDate} renderer={renderer}/>
+            <Countdown date={new Date(Date.now() + timeLeft)}
+                renderer={renderer}/>
             <ResultTable data={tokenData}/>
             <Button isOverlayOpen={isOverlayOpen} setIsOverlayOpen={setIsOverlayOpen}/>
             <Overlay isOpen={isOverlayOpen} onClose={() => setIsOverlayOpen(false)}>
                 <h2 style={{margin: '30px auto', fontSize: '30px'}}>History</h2>
                 <p style={{fontSize: '15px'}}>Enter Date to see the history</p>
                 <DatePicker/>
+
             </Overlay>
         </div>);
 }
