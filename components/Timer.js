@@ -203,7 +203,7 @@ function App() {
         const lowestEmptyTime = findLowestEmptyTime();
 
         if (lowestEmptyTime) {
-            const difference = lowestEmptyTime.diff(serverTime) + (61*1000);
+            const difference = lowestEmptyTime.diff(serverTime);
 
             if (difference > 0) {
                 setTimeLeft(difference);
