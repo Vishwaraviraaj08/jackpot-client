@@ -5,6 +5,10 @@ import Spinner from "@/components/Spinner";
 
 function ResultTable({data}) {
 
+    useEffect(() => {
+        console.log("inside resultable", data)
+    }, []);
+
     return (
         <> {
             data.length === 0  ? <div className="">No data available</div> :

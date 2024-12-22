@@ -7,18 +7,21 @@ const DatePicker = () => {
     // Initialize with the current date
     const today = new Date().toISOString().split("T")[0];
     const [currentDate, setCurrentDate] = useState(today);
-    const [data, setData] = useState([]);
+    const [data, setData] = useState({});
     const [isLoading, setIsLoading] = useState(false);
 
     const handleDateChange = (e) => {
+        console.log(e.target.value);
         setCurrentDate(e.target.value);
     };
 
     const handleShowHistory = () => {
         setIsLoading(true);
+        console.log("Fetching data...")
         fetch(`https://fantasy-api-delta.vercel.app/api/tokenHistory?date=${currentDate}`)
             .then((response) => response.json())
             .then((json) => {
+                console.log(json);
                 setData(json);
                 setIsLoading(false);
             })
@@ -50,7 +53,7 @@ const DatePicker = () => {
                     <Spinner/>
                 </div>
             ) : (
-                data.length > 0 && (
+                Object.keys(data).length > 0 && (
                     <div>
                         <ResultTable data={data} />
                     </div>
