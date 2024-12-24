@@ -4,8 +4,15 @@ import './Spinner.css'
 
 function Spinner() {
     return (
+        <div style={{margin:'auto', display:'flex', justifyContent:'center', alignItems:'center'}}>
         <div className="spinner">
-            <div className="spinner1"></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
         </div>
     )
 }

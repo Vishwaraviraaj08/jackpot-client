@@ -3,7 +3,7 @@
     --color-white: #ffffff;
     --color-blue-12: #191A23;
     --color-blue-14: #1D1E28;
-    --color-blue-26: #343650;
+    --color-blue-26: #2b3067;
     --color-blue-59: #8385A9;
     --color-pink-68: #FB5E84;
 
@@ -44,7 +44,7 @@ body {
     background-position: top center;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    background-color: var(--color-blue-14);
+    background-image: linear-gradient(315deg, #33006F, #000000);
     font-family: 'Red Hat Text', sans-serif;
 }
 

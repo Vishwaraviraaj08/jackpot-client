@@ -7,6 +7,7 @@ import ResultTable from "@/components/ResultTable";
 import Button from "@/components/Button";
 import Overlay from "@/components/Overlay";
 import DatePicker from "@/components/DatePicker";
+import Image from "next/image";
 
 
 function StaticCard({position, number}) {
@@ -152,7 +153,6 @@ function App() {
             });
 
             const tokensExpiredData = await tokensExpired.json();
-            console.log(tokensExpiredData)
 
             const tokensExpiredObject = tokensExpiredData.reduce((acc, item) => {
                 acc[item.time] = item.tokenId;
@@ -175,7 +175,6 @@ function App() {
             const timer = setTimeout(() => {
                 setTimeLeft((prev) => prev - 1000);
             }, 1000);
-            console.log(timeLeft, tokenData)
 
             return () => clearTimeout(timer);
         } else if (timeLeft !== null) {
@@ -229,9 +228,8 @@ function App() {
     const [isOverlayOpen, setIsOverlayOpen] = useState(false);
 
     return (<div className="App">
-            <Header/>
             <header className="header">
-                <h1 className="t-heading">Time Remaining</h1>
+                <Image src={"/logo.png"} alt={"Super Lot"} width={250} height={150}/>
             </header>
             <Countdown date={new Date(Date.now() + timeLeft)}
                 renderer={renderer}/>

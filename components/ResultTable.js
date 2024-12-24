@@ -5,9 +5,12 @@ import Spinner from "@/components/Spinner";
 
 function ResultTable({data}) {
 
-    useEffect(() => {
-        console.log("inside resultable", data)
-    }, []);
+    function convertTo12HourFormat(time24) {
+        const [hours, minutes] = time24.split(':').map(Number);
+        const period = hours >= 12 ? 'pm' : 'am';
+        const hours12 = hours % 12 || 12;
+        return `${hours12.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} ${period}`;
+    }
 
     return (
         <> {
@@ -18,7 +21,7 @@ function ResultTable({data}) {
                     <thead>
                     <tr>
                         <th>Time</th>
-                        <th>Token ID</th>
+                        <th>Results</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -29,7 +32,7 @@ function ResultTable({data}) {
                             let value = entry[1];
                             return (
                                 <tr key={key}>
-                                    <td>{key}</td>
+                                    <td>{convertTo12HourFormat(key)}</td>
                                     <td>{value === "" ? <Spinner/> : value}</td>
                                 </tr>
                             )
